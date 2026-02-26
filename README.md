@@ -33,16 +33,16 @@ A clean, ad-free money counter Progressive Web App (PWA) built with React for qu
 
 To run this project locally:
 
-# Clone this repository
+**Clone this repository**
 git clone https://github.com/YOUR-USERNAME/money-counter.git
 
-# Navigate to project folder
+**Navigate to project folder**
 cd money-counter
 
-# Install dependencies
+**Install dependencies**
 npm install
 
-# Start development server
+**Start development server**
 npm run dev
 
 ## 📲 Install on iPhone
