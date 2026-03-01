@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
+// import wake lock hook
+import { useWakeLock } from 'react-screen-wake-lock'
 
 function App() {
+  // screen wake lock functionality
+  const { isSupported, isLocked, request, release } = useWakeLock({
+    onError: (error) => console.log('Wake lock error:', error)
+  })
+
   // state for bills and coins all starting at 0
   const [bills, setBills] = useState({
     hundred: 0, fifty: 0, twenty: 0, ten: 0, five: 0, two: 0, one: 0
@@ -27,6 +34,21 @@ function App() {
     if (savedBills) setBills(JSON.parse(savedBills))
     if (savedCoins) setCoins(JSON.parse(savedCoins))
   }, [])
+
+  // request wake lock when app mounts, release when unmounts
+  useEffect(() => {
+    // check if browser supports wake lock
+    if (isSupported) {
+      request()
+    }
+    
+    // cleanup function - releases wake lock when component unmounts
+    return () => {
+      if (isSupported) {
+        release()
+      }
+    }
+  }, [isSupported, request, release])
 
   // save data whenever bills or coins change
   useEffect(() => {
@@ -98,7 +120,6 @@ function App() {
             label="$100" 
             value={bills.hundred}
             onChange={(val) => handleBillChange('hundred', val)}
-            // pass subtotal for display
             subtotal={bills.hundred * 100}
             formatCurrency={formatCurrency}
           />
@@ -196,7 +217,7 @@ function App() {
         </div>
       </div>
 
-      {/* total display w/ formatted currency */}
+      {/* total display */}
       <div style={styles.totalContainer}>
         <h2 style={styles.totalText}>
           Total: {formatCurrency(calculateTotal())}
@@ -216,7 +237,7 @@ function App() {
   )
 }
 
-// custom input component with built-in keypad and subtotal
+// custom input component
 function InputField({ label, value, onChange, subtotal, formatCurrency }) {
   return (
     <div style={inputStyles.container}>
@@ -231,7 +252,6 @@ function InputField({ label, value, onChange, subtotal, formatCurrency }) {
         placeholder="0"
         style={inputStyles.input}
       />
-      {/* display subtotal if formatCurrency is provided */}
       {formatCurrency && (
         <div style={inputStyles.subtotal}>
           {formatCurrency(subtotal || 0)}
@@ -241,7 +261,7 @@ function InputField({ label, value, onChange, subtotal, formatCurrency }) {
   )
 }
 
-// styles object for clean organization
+// styles
 const styles = {
   container: {
     maxWidth: '600px',
@@ -294,25 +314,12 @@ const styles = {
   },
   buttonContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
-    gap: '20px',
+    justifyContent: 'center',
     marginTop: '10px',
   },
-  calculateButton: {
-    flex: 1,
-    backgroundColor: '#3498db',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    padding: '18px',
-    fontSize: '18px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    boxShadow: '0 4px 6px rgba(52, 152, 219, 0.3)',
-    transition: 'transform 0.1s, box-shadow 0.1s',
-  },
   resetButton: {
-    flex: 1,
+    width: '100%',
+    maxWidth: '300px',
     backgroundColor: '#e74c3c',
     color: 'white',
     border: 'none',
@@ -326,7 +333,6 @@ const styles = {
   }
 }
 
-// subtotal styles
 const inputStyles = {
   container: {
     display: 'flex',
@@ -349,7 +355,6 @@ const inputStyles = {
     width: '100%',
     boxSizing: 'border-box',
   },
-  // styles for the subtotal display
   subtotal: {
     fontSize: '14px',
     color: '#27ae60',
