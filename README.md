@@ -1,16 +1,66 @@
-# React + Vite
+# 💰 Money Counter App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean, ad-free money counter Progressive Web App (PWA) built with React for quick and easy register counting.
 
-Currently, two official plugins are available:
+![Screenshot of the Money Counter UI](images/money-counter-ss.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Real-time calculations** - Total updates instantly as you type
+- **Automatic saving** - Never lose your count, even if you close the app
+- **Mobile-friendly** - Large buttons, numeric keypad on iPhones
+- **Separated sections** - Bills and coins organized neatly
+- **Safe reset** - Confirmation dialog prevents accidental data loss
+- **Subtotals** - See running totals for each denomination
+- **Installable** - Add to iPhone home screen as a real app
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📱 How to Use
 
-## Expanding the ESLint configuration
+1. Enter quantities for each bill and coin denomination
+2. Watch the total update automatically at the bottom
+3. Each field shows its subtotal in green
+4. Use Reset All to start over (with confirmation)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Technologies Used
+
+- React (with Hooks: useState, useEffect)
+- Vite (for fast development and building)
+- LocalStorage API (for data persistence)
+- CSS (with mobile-first responsive design)
+- Progressive Web App capabilities
+
+## 🚀 Installation
+
+To run this project locally:
+
+**Clone this repository**
+git clone https://github.com/YOUR-USERNAME/money-counter.git
+
+**Navigate to project folder**
+cd money-counter
+
+**Install dependencies**
+npm install
+
+**Start development server**
+npm run dev
+
+## 📲 Install on iPhone
+Open the app in Safari on your iPhone
+
+Tap the Share button (square with arrow)
+
+Scroll down and tap "Add to Home Screen"
+
+Name it and tap "Add"
+
+Open from home screen like a native app!
+
+## 💡 Why I Built This
+I created this app to solve a frustration at work where the existing money counting website was slow, buggy, and full of ads. This clean, fast alternative makes counting my register quick and pleasant. It's now my daily driver for closing out registers!
+
+## 🔮 Future Improvements
+Dark mode support
+
+## 📄 License
+MIT
